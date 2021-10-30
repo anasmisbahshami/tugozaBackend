@@ -6,7 +6,10 @@ module.exports = function reduceUserData(userDetails) {
       'accessToken',
       'refreshToken',
       'dormantUser',
-      'isAdmin'
+      'isAdmin',
+      'firstName',
+      'lastName',
+      'role'
     ])
   };
 };

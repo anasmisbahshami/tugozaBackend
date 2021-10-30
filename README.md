@@ -23,3 +23,17 @@ $ sudo pm2 start pm2.json
 $ npm start
 ```
 
+## Apis
+| URL                               | methods   | middlewares   |
+| --------------------------------- | --------- | -------------- |
+| *                                 | OPTIONS   | corsMiddleware |
+| /api/auth/signup                  | POST      | NO      |
+| /api/auth/login                   | POST      | NO      |
+| /api/auth/logout                  | GET       | NO      |
+| /api/auth/verification-email      | POST      | NO      |
+| /api/auth/confirm-email           | GET       | NO      |
+| /api/auth/forgot-password         | POST      | NO      |
+| /api/auth/reset-password          | POST      | NO      |
+| /api/auth/change-password         | POST      | NO      |
+| /api/auth/validate-reset-password | POST      | NO      |
+| /api/auth/refresh-session         | POST      | NO      |

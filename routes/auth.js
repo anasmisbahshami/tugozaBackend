@@ -5,14 +5,6 @@ const reduceUserData = require('../utils/reduceUserData');
 const validator = require('../utils/validator');
 const passport = require('passport');
 
-
-
-
-
-
-
-
-/*
 router.post('/signup', (req, res, next) => {
   const { email, password } = req.body;
   const emailValidation = validator.isValidEmail(email);
@@ -88,5 +80,4 @@ router.post('/reset-password', auth.resetPassword);
 router.post('/change-password', auth.changePassword);
 router.post('/validate-reset-password', auth.validateResetPassword);
 router.post('/refresh-session', auth.refreshSession);
-*/
 module.exports = router;

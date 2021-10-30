@@ -13,6 +13,12 @@ module.exports = function (sequelize) {
         isEmail: true
       }
     },
+    firstName: {
+      type: Sequelize.STRING,
+    },
+    lastName: {
+      type: Sequelize.STRING,
+    },
     accessToken: {
       type: Sequelize.STRING,
     },
@@ -45,6 +51,11 @@ module.exports = function (sequelize) {
       type: Sequelize.INTEGER,
       defaultValue: 0
     },
+    role: {
+      type: Sequelize.STRING,
+      defaultValue: 'client'
+    }
+
   }, {
     timestamps: true,
   });

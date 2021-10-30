@@ -43,6 +43,11 @@ module.exports = function (passport, User) {
           message: 'Email already taken!'
         });
       }
+      if (!req.body.firstName || !req.body.lastName) {
+        return done(null, false, {
+          message: 'First Name or last name cant be empty'
+        });
+      }
       const userPassword = generateHash(password);
       const emailConfirmationToken = randomString.generate(6);
       const id = uuidV4();
@@ -63,7 +68,10 @@ module.exports = function (passport, User) {
         access_token: accessToken,
         refresh_token: refreshToken,
         password: userPassword,
-        emailConfirmationToken
+        emailConfirmationToken,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        role: req.body.role,
       }).then(async (newUser) => {
         if (!newUser) {
           return done(null, false, {

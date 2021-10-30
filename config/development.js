@@ -7,7 +7,7 @@ const config = {
   },
   db: {
     host: 'localhost',
-    database: 'norsa',
+    database: 'tugoza',
     username: 'root',
     password: 'root',
     dialect: 'mysql',
