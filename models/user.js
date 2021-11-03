@@ -19,6 +19,21 @@ module.exports = function (sequelize) {
     lastName: {
       type: Sequelize.STRING,
     },
+    profilePicture: {
+      type: Sequelize.STRING,
+    },
+    dob: {
+      type: Sequelize.DATE,
+    },
+    contactNo: {
+      type: Sequelize.STRING,
+    },
+    address1: {
+      type: Sequelize.STRING,
+    },
+    address2: {
+      type: Sequelize.STRING,
+    },
     accessToken: {
       type: Sequelize.STRING,
     },

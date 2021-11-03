@@ -9,7 +9,12 @@ module.exports = function reduceUserData(userDetails) {
       'isAdmin',
       'firstName',
       'lastName',
-      'role'
+      'role',
+      'profilePicture',
+      'dob',
+      'contactNo',
+      'address1',
+      'address2',
     ])
   };
 };

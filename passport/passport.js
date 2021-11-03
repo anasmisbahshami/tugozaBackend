@@ -72,6 +72,11 @@ module.exports = function (passport, User) {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         role: req.body.role,
+        profilePicture: req.body.profilePicture,
+        dob: req.body.dob,
+        contactNo: req.body.contactNo,
+        address1: req.body.address1,
+        address2: req.body.address2,
       }).then(async (newUser) => {
         if (!newUser) {
           return done(null, false, {
