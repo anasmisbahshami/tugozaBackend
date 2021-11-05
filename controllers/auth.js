@@ -186,7 +186,7 @@ exports.changePassword = (req, res) => {
       message: passwordValidation.reason
     });
   }
-  
+
   return models.user.findOne({
     where: {
       id: req.user.id
@@ -347,4 +347,17 @@ exports.verificationEmail = async (req, res) => {
       message: 'Error while update user'
     });
   });
+};
+
+exports.getUserByRole = (req, res) => {
+  const { role } = req;
+  models.user.findAll({
+    where: {
+      role
+    } }).then(data => {
+      return res.json({ result: 'ok', data });
+    }).catch(err => {
+      console.log(err);
+      return res.status(400).send({ result: 'error', message: reduceErrorMessage(err) });
+    });
 };
