@@ -350,7 +350,7 @@ exports.verificationEmail = async (req, res) => {
 };
 
 exports.getUserByRole = (req, res) => {
-  const { role } = req.boy;
+  const { role } = req.body;
   models.user.findAll({
     where: {
       role
