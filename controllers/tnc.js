@@ -67,7 +67,7 @@ exports.updateTnc = (req, res) => {
   const { id, title } = req.body;
   models.tnc
     .update(
-      { title } , {
+      { title }, {
         where: {
           id
         }

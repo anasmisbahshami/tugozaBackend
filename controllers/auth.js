@@ -11,6 +11,8 @@ const passport = require('passport');
 const reduceUserData = require('../utils/reduceUserData');
 const reduceErrorMessage = require('../utils/reduceErrorMessage');
 
+models.user.hasMany(models.media);
+
 /**
  * confirm email
  * @param {*} req
