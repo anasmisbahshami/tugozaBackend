@@ -4,7 +4,7 @@ const models = require('../models/index');
 exports.getMediaByUserId = (req, res) => {
   const userId = req.query.userId;
   models.media
-    .find({
+    .findAll({ // to find all records matching the condition 
       where: {
         userId,
       },
