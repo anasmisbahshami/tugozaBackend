@@ -365,27 +365,14 @@ exports.getUserByRole = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  const { id, role, status } = req.body;
-  if (!id || id === '') {
-    return res.status(400).send({ result: 'error', message: 'User id is empty' });
-  }
-  if (!role || role === '') {
-    return res.status(400).send({ result: 'error', message: 'User role is empty' });
-  }
-  if (!status || status === '') {
-    return res.status(400).send({ result: 'error', message: 'User status is empty' });
-  }
-  models.user.update({
-    role,
-    status
-  }, {
+  const { id } = req.body;
+  models.user.update(req.body, {
     where: {
       id
     }
-  }).then(() => {
-    return res.json({ result: 'ok' });
-  }).catch(err => {
+  }).then(() => res.json({ result: 'ok', message: 'User updated' })
+  ).catch(err => {
     console.log(err);
     return res.status(400).send({ result: 'error', message: reduceErrorMessage(err) });
   });
-}
+};
