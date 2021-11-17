@@ -4,7 +4,8 @@ const models = require('../models/index');
 exports.getMediaByUserId = (req, res) => {
   const userId = req.query.userId;
   models.media
-    .findAll({ // to find all records matching the condition 
+    .findAll({
+      // to find all records matching the condition
       where: {
         userId,
       },
@@ -66,18 +67,54 @@ exports.updateMedia = (req, res) => {
 
 // eslint-disable-next-line consistent-return
 exports.deleteMedia = (req, res) => {
-  const userId = req.query.userId;
-  if (!userId) {
+  const id = req.query.Id;
+  if (!id) {
     return res.status(400).send({ status: 'error', message: 'id is required' });
   }
   models.media
     .destroy({
       where: {
-        userId,
+        id,
       },
     })
     .then((data) => res.status(200).send({ status: 'success', data }))
     .catch((err) =>
       res.status(500).send({ status: 'error', message: err.message })
     );
+};
+
+exports.changeMediaStatus = (req, res) => {
+  const { id, status } = req.body;
+  if (!id) {
+    return res.status(400).send({ status: 'error', message: 'id is required' });
+  }
+  if (!status) {
+    return res
+      .status(400)
+      .send({ status: 'error', message: 'status is required' });
+  }
+  if (status === 'approved') {
+    models.media
+      .update(
+        { status },
+      {
+        where: {
+          id,
+        },
+      }
+      )
+      .then((data) => res.status(200).send({ status: 'success', data }))
+      .catch((err) =>
+        res.status(500).send({ status: 'error', message: err.message })
+      );
+  } else {
+    models.media
+      .destroy({
+        where: { id },
+      })
+      .then((data) => res.status(200).send({ status: 'success', data }))
+      .catch((err) =>
+        res.status(500).send({ status: 'error', message: err.message })
+      );
+  }
 };

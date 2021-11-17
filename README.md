@@ -38,6 +38,7 @@ $ npm start
 | /api/auth/validate-reset-password | POST      | NO      |
 | /api/auth/refresh-session         | POST      | NO      |
 | /api/auth/getUserByRole           | POST      | TokkenValidation      |
+| /api/auth/updateUser           | POST      | TokkenValidation      |
 | /api/genre/getAllGenres                | GET       | TokkenValidation      |
 | /api/genre/getAllGenres                | GET       | TokkenValidation      |
 | /api/genre/getGenreById                | GET       | TokkenValidation      |

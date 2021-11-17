@@ -15,7 +15,7 @@ module.exports = function (sequelize) {
         type: Sequelize.STRING,
       },
       url: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       type: {
         type: Sequelize.STRING,
@@ -29,7 +29,13 @@ module.exports = function (sequelize) {
           model: 'users', // 'fathers' refers to table name
           key: 'id', // 'id' refers to column name in fathers table
         }
-
+      },
+      genreId: {
+        type: Sequelize.STRING,
+        references: {
+          model: 'genre',
+          key: 'id',
+        },
       },
     },
     {
