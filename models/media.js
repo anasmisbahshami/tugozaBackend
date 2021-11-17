@@ -31,9 +31,9 @@ module.exports = function (sequelize) {
         }
       },
       genreId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references: {
-          model: 'genre',
+          model: 'genres',
           key: 'id',
         },
       },

@@ -53,5 +53,6 @@ $ npm start
 | /api/media/getMediaByUserId | GET       | TokkenValidation     |
 | /api/media/getAllMedia      | GET       | TokkenValidation     |
 | /api/media/createMedia      | POST      | TokkenValidation     |
+| /api/media/changeMediaStatus      | POST      | TokkenValidation     |
 | /api/media/updateMedia      | PUT       | TokkenValidation     |
 | /api/media/deleteMedia      | DELETE    | TokkenValidation     |
