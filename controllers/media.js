@@ -118,3 +118,49 @@ exports.changeMediaStatus = (req, res) => {
       );
   }
 };
+
+exports.getPendingMedia = (req, res) => {
+  const limit = parseInt(
+    req.query.limit !== undefined ? req.query.limit : 10,
+    10
+  ); // update these two line in all controllers
+  const offset = parseInt(
+    req.query.offset !== undefined ? req.query.offset : 0,
+    10
+  );
+  models.media
+    .findAll({
+      where: {
+        status: 'pending',
+      },
+      limit,
+      offset,
+    })
+    .then((data) => res.status(200).send({ status: 'success', data }))
+    .catch((err) =>
+      res.status(500).send({ status: 'error', message: err.message })
+    );
+};
+
+exports.getRejectedMedia = (req, res) => {
+  const limit = parseInt(
+    req.query.limit !== undefined ? req.query.limit : 10,
+    10
+  ); // update these two line in all controllers
+  const offset = parseInt(
+    req.query.offset !== undefined ? req.query.offset : 0,
+    10
+  );
+  models.media
+    .findAll({
+      where: {
+        status: 'rejected',
+      },
+      limit,
+      offset,
+    })
+    .then((data) => res.status(200).send({ status: 'success', data }))
+    .catch((err) =>
+      res.status(500).send({ status: 'error', message: err.message })
+    );
+};
