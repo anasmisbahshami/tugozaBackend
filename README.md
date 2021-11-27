@@ -56,3 +56,5 @@ $ npm start
 | /api/media/changeMediaStatus      | POST      | TokkenValidation     |
 | /api/media/updateMedia      | PUT       | TokkenValidation     |
 | /api/media/deleteMedia      | DELETE    | TokkenValidation     |
+| /api/media/getPendingMedia      | POST    | TokkenValidation     |
+| /api/media/getRejectedMedia      | POST    | TokkenValidation     |
