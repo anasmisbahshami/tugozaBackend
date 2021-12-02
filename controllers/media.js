@@ -143,7 +143,7 @@ exports.getPendingMedia = (req, res) => {
 };
 
 exports.getRejectedMedia = (req, res) => {
-  const id  = req.body.id;
+  const userId  = req.body.userId;
   const limit = parseInt(
     req.query.limit !== undefined ? req.query.limit : 10,
     10
@@ -155,7 +155,7 @@ exports.getRejectedMedia = (req, res) => {
   models.media
     .findAll({
       where: {
-        id,
+        userId,
         status: 'rejected',
       },
       limit,
