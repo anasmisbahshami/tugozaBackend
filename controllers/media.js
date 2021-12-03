@@ -93,7 +93,6 @@ exports.changeMediaStatus = (req, res) => {
       .status(400)
       .send({ status: 'error', message: 'status is required' });
   }
-  if (status === 'approved') {
     models.media
       .update(
         { status },
@@ -107,16 +106,6 @@ exports.changeMediaStatus = (req, res) => {
       .catch((err) =>
         res.status(500).send({ status: 'error', message: err.message })
       );
-  } else {
-    models.media
-      .destroy({
-        where: { id },
-      })
-      .then((data) => res.status(200).send({ status: 'success', data }))
-      .catch((err) =>
-        res.status(500).send({ status: 'error', message: err.message })
-      );
-  }
 };
 
 exports.getPendingMedia = (req, res) => {
