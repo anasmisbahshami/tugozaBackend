@@ -69,6 +69,9 @@ module.exports = function (sequelize) {
     role: {
       type: Sequelize.STRING,
       defaultValue: 'client'
+    },
+    about: {
+      type: Sequelize.TEXT,
     }
 
   }, {

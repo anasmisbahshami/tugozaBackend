@@ -82,4 +82,5 @@ router.post('/validate-reset-password', auth.validateResetPassword);
 router.post('/refresh-session', auth.refreshSession);
 router.post('/getUserByRole', auth.getUserByRole);
 router.post('/updateUser', auth.updateUser);
+router.post('/getUserById', auth.getUserById);
 module.exports = router;
