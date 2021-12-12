@@ -43,11 +43,6 @@ module.exports = function (passport, User) {
           message: 'Email already taken!'
         });
       }
-      if (!req.body.firstName || !req.body.lastName) {
-        return done(null, false, {
-          message: 'First Name or last name cant be empty'
-        });
-      }
       const userPassword = generateHash(password);
       const emailConfirmationToken = randomString.generate(6);
       const id = uuidV4();
