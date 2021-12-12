@@ -408,3 +408,38 @@ exports.getUserById = async (req, res) => {
     return res.status(400).send({ result: 'error', message: reduceErrorMessage(err) });
   });
 };
+
+exports.updateUserProfile = (req, res) => {
+  const { id } = req.body;
+  models.user.update(req.body, {
+    where: {
+      id
+    }
+  }).then(() => res.json({ result: 'ok', message: 'User updated' })
+  ).catch(err => {
+    console.log(err);
+    return res.status(400).send({ result: 'error', message: reduceErrorMessage(err) });
+  });
+};
+exports.confirmEmailOauth = (req, res) => {
+  // var email = req.query.email;
+  const { email } = req.query;
+  models.user.findOne({
+    where: {
+      email
+    }
+  }).then((user) => {
+    if (user) {
+      // confirm action
+      user.update({
+        emailConfirmed: true,
+        emailConfirmationToken: null
+      });
+      return res.status(200).send({ result: 'ok', message: 'Email verified. Your account is active now' });
+    }
+    return res.status(400).send({ result: 'error', message: 'User Does Not Exist' });
+  }).catch(err => {
+    console.log(err);
+    return res.status(400).send({ result: 400, message: err.toSting() });
+  });
+};
