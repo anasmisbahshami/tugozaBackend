@@ -16,6 +16,7 @@ const whiteList = [
   '/api/auth/refreshsession',
   '/api/tnc/getAllTnc',
   '/api/tnc/getTncById',
+  '/api/auth/confirmEmailOauth',
 ];
 const adminApis = [
   '/admin',
