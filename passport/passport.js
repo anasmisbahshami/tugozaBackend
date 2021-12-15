@@ -57,7 +57,7 @@ module.exports = function (passport, User) {
       const refreshToken = jwt.sign(payload, appSecret, {
         expiresIn: '90d' // expires in 3 month
       });
-      return User.create({
+      const createUser = {
         id,
         email,
         access_token: accessToken,
@@ -71,8 +71,13 @@ module.exports = function (passport, User) {
         dob: req.body.dob,
         contactNo: req.body.contactNo,
         address1: req.body.address1,
-        address2: req.body.address2,
-      }).then(async (newUser) => {
+        address2: req.body.address2,      
+      };
+      if(req.body.auth == 'OAuth'){
+        createUser.emailConfirmed= true;
+        createUser.emailConfirmationToken= null;
+      }
+      return User.create(createUser).then(async (newUser) => {
         if (!newUser) {
           return done(null, false, {
             message: 'create failure'
