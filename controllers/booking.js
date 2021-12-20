@@ -58,7 +58,7 @@ exports.changeBookingStatusForUser = (req, res) => {
 
 exports.getAllBookingsByClient = (req, res) => {
     
-    const { clientId , status} = req.query.userId;
+    const { clientId , status} = req.query;
     models.booking.findAll({
         where: {
             clientId,
