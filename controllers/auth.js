@@ -409,11 +409,10 @@ exports.getUserById = async (req, res) => {
     return res.status(400).send({ result: 'error', message: reduceErrorMessage(err) });
   });
 };
-exports.getOnlyMediaUserById = async (req, res) => {
-  const { id } = req.body;
+exports.getOnlyMediaUsers = async (req, res) => {
   models.user.findOne({
     where: {
-      id
+      role:'Artist'
     }
   }).then( async data => {
     let genreSet = new Set();
