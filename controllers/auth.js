@@ -389,6 +389,42 @@ exports.getUserById = async (req, res) => {
     const allMedia = await models.media.findAll({
       where: {userId}
     });
+
+    allMedia.map(async (media) => {
+      const genreId = media.genreId; 
+      const allGenre = await models.genre.findAll({
+        where: {genreId}
+      });
+
+      allGenre.map((genre) => {
+        genreSet.add(genre.genre);
+      });
+    });
+    newData['data']= data;
+    newData['genre'] = genreSet;
+    newData['media'] = allMedia;
+    return res.json({ result: 'ok', newData});
+  }).catch(err => {
+    console.log(err);
+    return res.status(400).send({ result: 'error', message: reduceErrorMessage(err) });
+  });
+};
+exports.getOnlyMediaUserById = async (req, res) => {
+  const { id } = req.body;
+  models.user.findOne({
+    where: {
+      id
+    }
+  }).then( async data => {
+    let genreSet = new Set();
+    const newData = {};
+    const userId = data.id;
+    const allMedia = await models.media.findAll({
+      where: {userId}
+    });
+    if(!allMedia){
+      return res.status(400).send({ result: 'error', message: 'Not found media' });
+    }
     allMedia.map(async (media) => {
       const genreId = media.genreId; 
       const allGenre = await models.genre.findAll({
@@ -443,3 +479,4 @@ exports.confirmEmailOauth = (req, res) => {
     return res.status(400).send({ result: 400, message: err.toSting() });
   });
 };
+

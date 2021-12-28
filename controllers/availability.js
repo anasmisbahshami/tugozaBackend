@@ -14,6 +14,20 @@ exports.markUnAvailable = (req, res) => {
     });
 };
 
+exports.markDayUnAvailable = (req, res) => {
+    const {date , userId , dayOff,availability } = req.body;
+    if(!date || !dayOff || !userId || !availability){
+        return res.status(400).json({
+            message: 'All fields are required'
+        });
+    }
+
+    models.availability.create({data,userId, dayOff, availability}).then((data) => {
+        res.status(200).json({message: 'success' , data } );
+    }).catch((err) => {
+        res.status(500).send({ status: 'error', message: err.message });
+    });
+};
 exports.getUserUnAvailability = (req, res) => {
     const { userId } = req.query;
     models.availability.findAll({

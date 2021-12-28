@@ -83,6 +83,7 @@ router.post('/refresh-session', auth.refreshSession);
 router.post('/getUserByRole', auth.getUserByRole);
 router.post('/updateUser', auth.updateUser);
 router.post('/getUserById', auth.getUserById);
+router.post('/getOnlyMediaUserById', auth.getOnlyMediaUserById);
 router.get('/confirmEmailOauth', auth.confirmEmailOauth);
 router.put('/updateUserProfile', auth.updateUserProfile);
 module.exports = router;

@@ -52,6 +52,42 @@ exports.getAllServicesById = (req, res) => {
           });
         });
 };
+exports.getAllServicesByUserId = (req, res) => {
+  const userId = parseInt(req.query.userId, 10);
+  if (!userId) {
+    return res.status(400).send({
+      message: 'Service userId can not be empty',
+    });
+  }
+  models.services
+      .findAll({
+        where: {
+          userId,
+        },
+      })
+      .then((data) => {
+        if (!data) {
+          return res.status(404).send({
+            message: `Service not found with id ${userId}`,
+          });
+        }
+        res.status(200).json({
+          status: 'success',
+          data,
+        });
+      })
+      .catch((err) => {
+        if (err.kind === 'ObjectId') {
+          return res.status(404).send({
+            message: `Service not found with id ${userId}`,
+          });
+        }
+        return res.status(500).send({
+          message: `Error retrieving Service with id ${userId}`,
+        });
+      });
+};
+
 
 exports.createService = (req, res) => {
 

@@ -4,6 +4,7 @@ const services = require('../controllers/services');
 
 router.get('/getAllServices', services.getAllServices);
 router.get('/getAllServicesById', services.getAllServicesById);
+router.get('/getAllServicesByUserId', services.getAllServicesByUserId);
 router.post('/createService', services.createService); 
 router.put('/updateService', services.updateService);
 router.delete('/deleteService', services.deleteService);

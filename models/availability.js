@@ -9,6 +9,9 @@ module.exports = function (sequelize) {
     date: {
       type: Sequelize.DATE,
     },
+    dayOff:{
+      type: Sequelize.STRING,
+    },
     startTime: {
         type: Sequelize.TIME,
     },
