@@ -421,9 +421,10 @@ exports.getOnlyMediaUsers = async (req, res) => {
       const newData = {};
       const userId = data.id;
       const allMedia = await models.media.findAll({
-        where: {userId}
+        where: {userId,type:'video'}
       });
-      if(!allMedia){
+      console.log(!allMedia);
+      if(!allMedia||allMedia.length==0){
         return res.status(400).send({ result: 'error', message: 'Not found media' });
       }
       await allMedia.map(async (element) => {
