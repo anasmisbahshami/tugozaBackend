@@ -410,34 +410,39 @@ exports.getUserById = async (req, res) => {
   });
 };
 exports.getOnlyMediaUsers = async (req, res) => {
-  models.user.findOne({
+  models.user.findAll({
     where: {
       role:'Artist'
     }
-  }).then( async data => {
-    let genreSet = new Set();
-    const newData = {};
-    const userId = data.id;
-    const allMedia = await models.media.findAll({
-      where: {userId}
-    });
-    if(!allMedia){
-      return res.status(400).send({ result: 'error', message: 'Not found media' });
-    }
-    allMedia.map(async (media) => {
-      const genreId = media.genreId; 
-      const allGenre = await models.genre.findAll({
-        where: {genreId}
+  }).then( async dataa => {
+    dataa.forEach(async element => {
+      let data = element.dataValues;
+      let genreSet = [];
+      const newData = {};
+      const userId = data.id;
+      const allMedia = await models.media.findAll({
+        where: {userId}
       });
-
-      allGenre.map((genre) => {
-        genreSet.add(genre.genre);
+      if(!allMedia){
+        return res.status(400).send({ result: 'error', message: 'Not found media' });
+      }
+      await allMedia.map(async (element) => {
+        const media = element.dataValues;
+        const genreId = media.genreId; 
+        const allGenre = await models.genre.findAll({
+          where: {id:genreId}
+        });
+  
+        allGenre.map((element) => {
+          const genre = element.dataValues;
+          genreSet.push(genre.title);
+        });
+        newData['data']= data;
+        newData['genre'] = genreSet;
+        newData['media'] = allMedia;
+        return res.json({ result: 'ok', newData});
       });
     });
-    newData['data']= data;
-    newData['genre'] = genreSet;
-    newData['media'] = allMedia;
-    return res.json({ result: 'ok', newData});
   }).catch(err => {
     console.log(err);
     return res.status(400).send({ result: 'error', message: reduceErrorMessage(err) });
