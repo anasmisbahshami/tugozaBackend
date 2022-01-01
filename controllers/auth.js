@@ -420,29 +420,37 @@ exports.getOnlyMediaUsers = async (req, res) => {
       let genreSet = [];
       const newData = {};
       const userId = data.id;
-      const allMedia = await models.media.findAll({
-        where: {userId,type:'video'}
-      });
-      console.log(!allMedia);
-      if(!allMedia||allMedia.length==0){
-        return res.status(400).send({ result: 'error', message: 'Not found media' });
+      try {
+        const mediaCount = await models.media.findAll({ // this will return only video records so i can count that 
+          where: {userId,type:'video'}
+        });
+        console.log(!mediaCount);
+        if(!mediaCount||mediaCount.length==0){
+          return res.status(400).send({ result: 'error', message: 'Not found media' });
+        }
+        const allMedia = await models.media.findAll({
+          where: {userId}
+        });
+        const temp = await allMedia.map(async (element) => {
+          const media = element.dataValues;
+          const genreId = media.genreId; 
+          const allGenre = await models.genre.findAll({
+            where: {id:genreId}
+          });
+    
+          allGenre.map((element) => {
+            const genre = element.dataValues;
+            genreSet.push(genre.title);
+          });
+          newData['data']= data;
+          newData['genre'] = genreSet;
+          newData['media'] = allMedia;
+          res.json({ result: 'ok', newData});
+        });
+      } catch (err) {
+        res.status(500).send({ result:'error', message: err.message})
       }
-      await allMedia.map(async (element) => {
-        const media = element.dataValues;
-        const genreId = media.genreId; 
-        const allGenre = await models.genre.findAll({
-          where: {id:genreId}
-        });
-  
-        allGenre.map((element) => {
-          const genre = element.dataValues;
-          genreSet.push(genre.title);
-        });
-        newData['data']= data;
-        newData['genre'] = genreSet;
-        newData['media'] = allMedia;
-        return res.json({ result: 'ok', newData});
-      });
+
     });
   }).catch(err => {
     console.log(err);
