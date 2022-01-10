@@ -409,7 +409,43 @@ models.sequelize
   `
   ,{type:models.sequelize.QueryTypes.SELECT})
   .then((data) => {
-    return res.json({ result: "ok", data });
+    const newArray = [];
+    let count = 0;
+    const idsArray = [];
+    data.map((user) => {
+
+        const media = {
+            genreId:user.genreId,
+            genreTitle:user.genreTitle,
+            mediaDescription: user.mediaDescription,
+            mediaId: user.mediaId,
+            mediaTitle: user.mediaTitle,
+            status: user.status,
+            type: user.type,
+            url: user.url };
+            if(!newArray.hasOwnProperty(idsArray[user.userId])){
+                idsArray[user.userId] = count++;
+                const userData = {
+                    userId: user.userId,
+                    profilePicture: user.profilePicture,
+                    lastName: user.lastName,
+                    firstName: user.firstName,
+                    email: user.email,
+                    dob: user.dob,
+                    address2: user.address2,
+                    address1: user.address1,
+                    about: user.about };
+                newArray[idsArray[user.userId]] = {
+                    userData: userData,
+                    media: []
+                };
+                newArray[idsArray[user.userId]].media.push(media);
+            }
+            else {
+                newArray[idsArray[user.userId]].media.push(media);
+            }
+    });
+    return res.json({ result: "ok",  data:newArray });
   })
   .catch((err) => {
     res.status(500).json({ message: "Error", err });
