@@ -68,6 +68,7 @@ $ npm start
 | /api/booking/deleteBooking              | DELETE    | TokkenValidation     |
 | /api/booking/changeBookingStatusForUser | POST      | TokkenValidation     |
 | /api/booking/getAllBookingsByClient     | POST      | TokkenValidation     |
+| /api/booking/getAllBookingsByStatus?status     | POST      | TokkenValidation     |
 | /api/services/getAllServices            | GET       | TokkenValidation     |
 | /api/services/getAllServicesById        | GET       | TokkenValidation     |
 | /api/services/createService             | POST      | TokkenValidation     |

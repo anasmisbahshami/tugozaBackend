@@ -69,5 +69,15 @@ exports.getAllBookingsByClient = (req, res) => {
         res.status(500).json({message: 'Error', err});
     });
 };
-
-
+exports.getAllBookingsByStatus = (req, res) => {
+    
+    const {status} = req.query;
+    models.booking.findAll({
+        where: {
+            status
+    }}).then(bookings => {
+        res.status(200).json({message: 'Success', bookings});
+    }).catch(err => {
+        res.status(500).json({message: 'Error', err});
+    });
+};
