@@ -13,6 +13,4 @@ module.exports = function (app) {
   app.use('/api/availability', availabilityRouter);
   app.use('/api/booking', bookingRouter);
   app.use('/api/services', servicesRouter);
-
-
 };

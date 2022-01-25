@@ -18,6 +18,7 @@ const whiteList = [
   '/api/tnc/getTncById',
   '/api/auth/confirmEmailOauth',
   '/api/auth/getOnlyMediaUsers',
+  '/api/services/getAllServicesByUserId',
 ];
 const adminApis = [
   '/admin',

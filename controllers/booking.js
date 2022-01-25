@@ -2,10 +2,12 @@ const models = require('../models/index');
 
 exports.getAllBookingsByUser = (req, res) => {
     const userId = req.query.userId;
-    models.booking.findAll({
-        where: {
-            userId
-    }}).then(bookings => {
+    if(!userId) {
+        res.status(400).json({message: 'UserId is required'});
+    }
+    models.sequelize.query(`SELECT b.*,u.firstName , u.lastName FROM bookings b
+    JOIN users u ON b.userId = u.id
+    WHERE b.userId = '${userId}'`,{type:models.sequelize.QueryTypes.SELECT}).then(bookings => {
         res.status(200).json({message: 'Success', bookings});
     }).catch(err => {
         res.status(500).json({message: 'Error', err});

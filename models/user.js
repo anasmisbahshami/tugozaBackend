@@ -72,6 +72,7 @@ module.exports = function (sequelize) {
     },
     about: {
       type: Sequelize.TEXT,
+      defaultValue: ''
     }
 
   }, {
