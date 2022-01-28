@@ -7,5 +7,5 @@ router.get('/getAllBookingsByStatus', booking.getAllBookingsByStatus);
 router.post('/createUserBooking', booking.createUserBooking);
 router.delete('/deleteBooking', booking.deleteBooking);
 router.post('/changeBookingStatusForUser', booking.changeBookingStatusForUser);
-router.post('/getAllBookingsByClient', booking.getAllBookingsByClient);
+router.get('/getAllBookingsByClient', booking.getAllBookingsByClient);
 module.exports = router;
