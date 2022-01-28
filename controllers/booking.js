@@ -62,10 +62,8 @@ exports.getAllBookingsByClient = (req, res) => {
     
     const { clientId , status} = req.query;
     models.booking.findAll({
-        where: {
-            clientId,
-            status
-    }}).then(bookings => {
+        where: status ? {status ,clientId } : {clientId} 
+    }).then(bookings => {
         res.status(200).json({message: 'Success', bookings});
     }).catch(err => {
         res.status(500).json({message: 'Error', err});
