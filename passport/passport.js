@@ -13,7 +13,7 @@ module.exports = function (passport, User) {
     done(null, user.id);
   });
   passport.deserializeUser((id, done) => {
-    User.findById(id).then((user) => {
+    User.findByPk(id).then((user) => {
       if (user) {
         done(null, user);
       } else {
@@ -33,9 +33,7 @@ module.exports = function (passport, User) {
 
     return User.findOne({
       where: {
-        email: {
-          $eq: email
-        }
+        email:email
       }
     }).then((user) => {
       if (user) {

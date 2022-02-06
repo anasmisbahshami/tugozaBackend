@@ -12,13 +12,14 @@ const config = {
     password: 'root',
     dialect: 'mysql',
     port: 3306,
+    operatorsAliases: 'false',
     pool: {
       max: 5,
       min: 0,
       acquire: 30000,
       idle: 10000
     },
-    logging: false
+    logging: false,
   },
   sendgrid: {
     apiKey: ''

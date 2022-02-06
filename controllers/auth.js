@@ -26,9 +26,7 @@ exports.confirmEmail = (req, res) => { // var email = req.query.email;
     }
     models.user.findOne({
         where: {
-            emailConfirmationToken: {
-                $eq: token
-            }
+            emailConfirmationToken: token
         }
     }).then((user) => {
         if (user) {
@@ -65,9 +63,8 @@ exports.forgotPassword = (req, res) => {
     }
     models.user.findOne({
         where: {
-            email: {
-                $eq: email
-            }
+            email: email
+        
         }
     }).then((found) => {
         if (!found) 
@@ -113,9 +110,7 @@ exports.resetPassword = (req, res) => {
     }
     return models.user.findOne({
         where: {
-            email: {
-                $eq: email
-            }
+            email:email
         }
     }).then((found) => {
         if (!found) 
@@ -195,9 +190,7 @@ exports.validateResetPassword = (req, res) => {
     }
     return models.user.findOne({
         where: {
-            email: {
-                $eq: email
-            }
+            email:email
         }
     }).then((found) => {
         if (!found) 
