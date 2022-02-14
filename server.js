@@ -1,4 +1,5 @@
 const app = require('express')();
+require('dotenv').config();
 const passport = require('passport');
 const cors = require('cors');
 const fs = require('fs');
@@ -17,15 +18,15 @@ const listEndpoints = require('express-list-endpoints')
 let server; //eslint-disable-line
 let httpServer; //eslint-disable-line
 server = require('http').createServer(app); // eslint-disable-line
-if (process.env.NODE_ENV !== 'production') {
-  server = require('http').createServer(app); // eslint-disable-line
-} else {
-  server = require('https').createServer(app); //eslint-disable-line
-  httpServer = http.createServer((req, res) => {
-    res.writeHead(301, { 'Location': 'https://' + req.headers['host'] + req.url }); // eslint-disable-line
-    res.end();
-  }).listen(80);
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   server = require('http').createServer(app); // eslint-disable-line
+// } else {
+//   server = require('https').createServer(app); //eslint-disable-line
+//   httpServer = http.createServer((req, res) => {
+//     res.writeHead(301, { 'Location': 'https://' + req.headers['host'] + req.url }); // eslint-disable-line
+//     res.end();
+//   }).listen(80);
+// }
 app.logger = logger;
 app.options('*', cors());
 app.use(cors());

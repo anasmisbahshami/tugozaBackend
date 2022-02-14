@@ -35,13 +35,16 @@ exports.getAllMedia = (req, res) => {
 
 exports.createMedia = (req, res) => {
   const { userId } = req.body;
+  const url = req.file.location;
   if (!userId) {
     return res
       .status(400)
       .send({ status: 'error', message: 'userId is required' });
   }
+  const body = req.body;
+  body.url = url;
   models.media
-    .create(req.body)
+    .create(body)
     .then((data) => res.status(200).send({ status: 'success', data }))
     .catch((err) =>
       res.status(500).send({ status: 'error', message: err.message })
@@ -49,12 +52,13 @@ exports.createMedia = (req, res) => {
 };
 
 exports.updateMedia = (req, res) => {
-  const { userId } = req.body;
-  if (!userId) {
+  const body = req.body;
+  body.url = url;
+  if (!body.userId) {
     return res.status(400).send({ status: 'error', message: 'id is required' });
   }
   models.media
-    .update(req.body, {
+    .update(body, {
       where: {
         userId,
       },

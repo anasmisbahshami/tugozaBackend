@@ -6,10 +6,10 @@ const config = {
       secret: 'asdfasfasdfasdafsdf231243243234234234234234234234',
     },
     db: {
-      host: 'localhost',
-      database: 'node-demo-app',
-      username: '',
-      password: '',
+      host: 'us-cdbr-east-05.cleardb.net',
+      database: 'heroku_0020300791a39b8',
+      username: 'bf9b3a4ae2827b',
+      password: 'b02ed112',
       dialect: 'mysql',
       port: 3306,
       pool: {
