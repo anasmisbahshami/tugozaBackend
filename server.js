@@ -17,7 +17,8 @@ const listEndpoints = require('express-list-endpoints')
 // };
 let server; //eslint-disable-line
 let httpServer; //eslint-disable-line
-server = require('http').createServer(app); // eslint-disable-line
+const port = process.env.PORT || 3000;
+server = require('http').createServer(app).listen( port ); // eslint-disable-line
 // if (process.env.NODE_ENV !== 'production') {
 //   server = require('http').createServer(app); // eslint-disable-line
 // } else {
