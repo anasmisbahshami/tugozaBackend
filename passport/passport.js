@@ -65,7 +65,7 @@ module.exports = function (passport, User) {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         role: req.body.role,
-        profilePicture: req.body.profilePicture,
+        profilePicture: req.file.location,
         dob: req.body.dob,
         contactNo: req.body.contactNo,
         address1: req.body.address1,

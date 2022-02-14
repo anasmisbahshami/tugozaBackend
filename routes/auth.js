@@ -4,8 +4,8 @@ const auth = require('../controllers/auth');
 const reduceUserData = require('../utils/reduceUserData');
 const validator = require('../utils/validator');
 const passport = require('passport');
-
-router.post('/signup', (req, res, next) => {
+const upload = require('../config/uploadConfig');
+router.post('/signup', upload.single('profilePicture') ,(req, res, next) => {
   const { email, password } = req.body;
   const emailValidation = validator.isValidEmail(email);
   if (!emailValidation.valid) {
