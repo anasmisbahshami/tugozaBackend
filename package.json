@@ -15,7 +15,7 @@
     "node": ">=8.x"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "migrate": "sequelize db:migrate"
   },
   "dependencies": {

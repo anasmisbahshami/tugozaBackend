@@ -55,6 +55,10 @@ module.exports = function (passport, User) {
       const refreshToken = jwt.sign(payload, appSecret, {
         expiresIn: '90d' // expires in 3 month
       });
+      let filePath = '';
+      if(req.file){
+        filePath = req.file.location ? req.file.location: '';
+      }
       const createUser = {
         id,
         email,
@@ -65,7 +69,7 @@ module.exports = function (passport, User) {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         role: req.body.role,
-        profilePicture: req.file.location || '',
+        profilePicture: filePath ,
         dob: req.body.dob,
         contactNo: req.body.contactNo,
         address1: req.body.address1,
