@@ -85,5 +85,5 @@ router.post('/updateUser', auth.updateUser);
 router.post('/getUserById', auth.getUserById);
 router.post('/getOnlyMediaUsers', auth.getOnlyMediaUsers);
 router.get('/confirmEmailOauth', auth.confirmEmailOauth);
-router.put('/updateUserProfile', auth.updateUserProfile);
+router.put('/updateUserProfile', upload.single('profilePicture'), auth.updateUserProfile);
 module.exports = router;
