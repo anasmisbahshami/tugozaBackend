@@ -3,7 +3,7 @@ const multerS3 = require('multer-s3');
 const s3Config = require('../config/aws');
 const multerS3Config = multerS3({
     s3: s3Config,
-    bucket: process.env.BUCKET_NAME,
+    bucket: `${process.env.BUCKET_NAME}`,
     metadata: function (req, file, cb) {
         cb(null, { fieldName: file.fieldname });
     },
