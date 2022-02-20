@@ -306,6 +306,7 @@ exports.getUserByRole = (req, res) => {
 
 exports.updateUser = (req, res) => {
     const {id} = req.body;
+    let filePath = '';
     if(req.file){
         filePath = req.file.location ? req.file.location: '';
       }
