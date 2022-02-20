@@ -310,6 +310,7 @@ exports.updateUser = (req, res) => {
     if(req.file){
         filePath = req.file.location ? req.file.location: '';
       }
+      console.log(filePath);
       const body = req.body;
       body.profilePicture = filePath;
     models.user.update(req.body, {where: {
