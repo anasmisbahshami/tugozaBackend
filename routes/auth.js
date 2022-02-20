@@ -81,7 +81,7 @@ router.post('/change-password', auth.changePassword);
 router.post('/validate-reset-password', auth.validateResetPassword);
 router.post('/refresh-session', auth.refreshSession);
 router.post('/getUserByRole', auth.getUserByRole);
-router.post('/updateUser', auth.updateUser);
+router.post('/updateUser', upload.single('profilePicture'), auth.updateUser);
 router.post('/getUserById', auth.getUserById);
 router.post('/getOnlyMediaUsers', auth.getOnlyMediaUsers);
 router.get('/confirmEmailOauth', auth.confirmEmailOauth);
