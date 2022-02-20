@@ -306,6 +306,11 @@ exports.getUserByRole = (req, res) => {
 
 exports.updateUser = (req, res) => {
     const {id} = req.body;
+    if(req.file){
+        filePath = req.file.location ? req.file.location: '';
+      }
+      const body = req.body;
+      body.profilePicture = filePath;
     models.user.update(req.body, {where: {
             id
         }}).then(() => res.json({result: 'ok', message: 'User updated'})).catch(err => {
@@ -447,6 +452,12 @@ models.sequelize
 
 exports.updateUserProfile = (req, res) => {
     const {id} = req.body;
+    let filePath = '';
+    if(req.file){
+      filePath = req.file.location ? req.file.location: '';
+    }
+    const body = req.body;
+    body.profilePicture = filePath;
     models.user.update(req.body, {where: {
             id
         }}).then(() => res.json({result: 'ok', message: 'User updated'})).catch(err => {
