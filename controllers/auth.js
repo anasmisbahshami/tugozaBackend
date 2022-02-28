@@ -306,6 +306,9 @@ exports.getUserByRole = (req, res) => {
 
 exports.updateUser = (req, res) => {
     const {id} = req.body;
+    if(!id){
+        return res.status(400).send({result: 'error', message: 'id is required'});
+    }
     let filePath = '';
     if(req.file){
         filePath = req.file.location ? req.file.location: '';
@@ -315,7 +318,9 @@ exports.updateUser = (req, res) => {
       body.profilePicture = filePath;
     models.user.update(req.body, {where: {
             id
-        }}).then(() => res.json({result: 'ok', message: 'User updated'})).catch(err => {
+        }}).then((data) => {
+            res.json({result: 'ok', data: data})
+        }).catch(err => {
         console.log(err);
         return res.status(400).send({result: 'error', message: reduceErrorMessage(err)});
     });
@@ -325,28 +330,28 @@ exports.getUserById = async (req, res) => {
     const {id} = req.body;
     models.user.findOne({where: {
             id
-        }}).then(async data => {
-        let genreSet = new Set();
-        const newData = {};
-        const userId = data.id;
-        const allMedia = await models.media.findAll({where: {
-                userId
-            }});
+        }}).then( data => {
+        // let genreSet = new Set();
+        // const newData = {};
+        // const userId = data.id;
+        // const allMedia = await models.media.findAll({where: {
+        //         userId
+        //     }});
 
-        allMedia.map(async (media) => {
-            const genreId = media.genreId;
-            const allGenre = await models.genre.findAll({where: {
-                    genreId
-                }});
+        // allMedia.map(async (media) => {
+        //     const genreId = media.genreId;
+        //     const allGenre = await models.genre.findAll({where: {
+        //             genreId
+        //         }});
 
-            allGenre.map((genre) => {
-                genreSet.add(genre.genre);
-            });
-        });
-        newData['data'] = data;
-        newData['genre'] = genreSet;
-        newData['media'] = allMedia;
-        return res.json({result: 'ok', newData});
+        //     allGenre.map((genre) => {
+        //         genreSet.add(genre.genre);
+        //     });
+        // });
+        // newData['data'] = data;
+        // newData['genre'] = genreSet;
+        // newData['media'] = allMedia;
+        return res.json({result: 'ok', data});
     }).catch(err => {
         console.log(err);
         return res.status(400).send({result: 'error', message: reduceErrorMessage(err)});

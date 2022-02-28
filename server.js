@@ -38,8 +38,6 @@ app.use((req, res, next) => {
   next();
 });
 
-console.log('process.env.BUCKET_NAME',process.env.BUCKET_NAME);
-
 console.log(process.env);
 app.use(require('morgan')('dev'));
 app.use(require('body-parser').urlencoded({ limit: '50mb', extended: true }));

@@ -35,7 +35,7 @@ exports.getAllMedia = (req, res) => {
 
 exports.createMedia = (req, res) => {
   const { userId } = req.body;
-  const url = req.file.location;
+  const url = req.file.location ? req.file.location: '';
   if (!userId) {
     return res
       .status(400)
