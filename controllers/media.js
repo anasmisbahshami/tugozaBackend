@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 const models = require('../models/index');
-
+// models.genre.belongsTo(models.media, {foreignKey: 'genreId'});
 exports.getMediaByUserId = (req, res) => {
   const userId = req.query.userId;
   models.media
@@ -9,6 +9,13 @@ exports.getMediaByUserId = (req, res) => {
       where: {
         userId,
       },
+      includes:[{
+        model: models.genre,
+        // as: 'genre',
+        required: true
+
+      }
+      ]
     })
     .then((data) => res.status(200).send({ status: 'success', data }))
     .catch((err) =>
