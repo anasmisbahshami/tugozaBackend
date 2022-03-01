@@ -3,20 +3,9 @@ const models = require('../models/index');
 // models.genre.belongsTo(models.media, {foreignKey: 'genreId'});
 exports.getMediaByUserId = (req, res) => {
   const userId = req.query.userId;
-  models.media
-    .findAll({
-      // to find all records matching the condition
-      where: {
-        userId,
-      },
-      includes:[{
-        model: models.genre,
-        // as: 'genre',
-        required: true
-
-      }
-      ]
-    })
+  models.sequelize.query(`SELECT m.*, g.title FROM media m JOIN genres g
+    ON m.genreId = g.id
+    WHERE m.userId =  '${userId}'`,{type:models.sequelize.QueryTypes.SELECT})
     .then((data) => res.status(200).send({ status: 'success', data }))
     .catch((err) =>
       res.status(500).send({ status: 'error', message: err.message })
