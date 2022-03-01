@@ -309,12 +309,12 @@ exports.updateUser = (req, res) => {
     if(!id){
         return res.status(400).send({result: 'error', message: 'id is required'});
     }
-    let filePath = '';
+    let filePath ;
+    const body = req.body;
     if(req.file){
         filePath = req.file?.location;
+        body.profilePicture = filePath;
       }
-      const body = req.body;
-      body.profilePicture = filePath;
     models.user.update(req.body, {where: {
             id
         }}).then((data) => {
