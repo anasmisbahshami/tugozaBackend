@@ -3,7 +3,7 @@ const models = require('../models/index');
 // models.genre.belongsTo(models.media, {foreignKey: 'genreId'});
 exports.getMediaByUserId = (req, res) => {
   const userId = req.query.userId;
-  models.sequelize.query(`SELECT m.*, g.title FROM media m JOIN genres g
+  models.sequelize.query(`SELECT m.*, g.title as genreTitle FROM media m JOIN genres g
     ON m.genreId = g.id
     WHERE m.userId =  '${userId}'`,{type:models.sequelize.QueryTypes.SELECT})
     .then((data) => res.status(200).send({ status: 'success', data }))
